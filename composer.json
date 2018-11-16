@@ -1,6 +1,6 @@
 {
-    "name": "proai/eloquent-versioning",
-    "description": "An extension for the Eloquent ORM to support versioning.",
+    "name": "innoved/eloquent-versioning",
+    "description": "An extension for the Eloquent ORM to support versioning. (modified for Laravel 4.2 support)",
     "keywords": [
         "laravel",
         "orm",
@@ -18,6 +18,9 @@
         {
             "name": "Markus J. Wetzel",
             "email": "markuswetzel@gmx.net"
+        }, {
+            "name": "Jonathan Marshall",
+            "email": "jonathanmarshall@innovedlearning.co.uk"
         }
     ],
     "require": {
