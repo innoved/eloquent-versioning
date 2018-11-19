@@ -120,4 +120,19 @@ trait Versionable
         return $this->getVersionTable().'.'.$this->getVersionColumn();
     }
 
+    public function hasCreatedByColumn()
+    {
+        return false;
+    }
+
+    public function hasUpdatedByColumn()
+    {
+        return false;
+    }
+
+    public function getAuthUserId()
+    {
+        return null;
+    }
+
 }

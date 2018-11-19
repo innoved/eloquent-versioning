@@ -44,6 +44,10 @@ trait BuilderTrait
         // set version, ref_id and latest_version
         $values[$this->model->getLatestVersionColumn()] = 1;
 
+        if($this->model->hasCreatedByColumn()) {
+            $values['created_by'] = $this->model->getAuthUserId();
+        }
+
         // insert main table record
         if (! $id = $this->query->insertGetId($values)) {
             return false;
@@ -125,6 +129,10 @@ trait BuilderTrait
                 $recordVersionValues[$key] = (isset($versionValues[$key])) ? $versionValues[$key] : $record->{$key};
             }
 
+            if($this->model->hasCreatedByColumn()) {
+                $recordVersionValues['updated_by'] = $this->model->getAuthUserId();
+            }
+            
             // merge versioned values from record and input
             $recordVersionValues = array_merge($recordVersionValues, $versionValues);
 
