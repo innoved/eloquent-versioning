@@ -3,12 +3,12 @@
 namespace Innoved\Versioning;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\ScopeInterface;
 use Illuminate\Database\Query\JoinClause;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
-class VersioningScope implements Scope
+class VersioningScope implements ScopeInterface
 {
     /**
      * All of the extensions to be added to the builder.
@@ -24,8 +24,10 @@ class VersioningScope implements Scope
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function apply(Builder $builder, Model $model)
+    public function apply(Builder $builder)
     {
+        $model = $builder->getModel();
+
         if (!$this->hasVersionJoin($builder, $model->getVersionTable())) {
             $builder->join($model->getVersionTable(), function($join) use ($model) {
                 $join->on($model->getQualifiedKeyName(), '=', $model->getQualifiedVersionKeyName());
@@ -43,13 +45,15 @@ class VersioningScope implements Scope
      * @param  \Illuminate\Database\Eloquent\Model  $model
      * @return void
      */
-    public function remove(Builder $builder, Model $model)
+    public function remove(Builder $builder)
     {
+        $model = $builder->getModel();
+
         $table = $model->getVersionTable();
 
         $query = $builder->getQuery();
 
-        $query->joins = collect($query->joins)->reject(function($join) use ($table)
+        $query->joins = Collection::make($query->joins)->reject(function($join) use ($table)
         {
             return $this->isVersionJoinConstraint($join, $table);
         })->values()->all();
@@ -155,6 +159,6 @@ class VersioningScope implements Scope
      */
     protected function hasVersionJoin(Builder $builder, string $table)
     {
-        return collect($builder->getQuery()->joins)->pluck('table')->contains($table);
+        return Collection::make($builder->getQuery()->joins)->contains($table);
     }
 }

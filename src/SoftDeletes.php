@@ -2,11 +2,11 @@
 
 namespace Innoved\Versioning;
 
-use Illuminate\Database\Eloquent\SoftDeletes as SoftDeletesTrait;
+use Illuminate\Database\Eloquent\SoftDeletingTrait as SoftDeletingTrait;
 
 trait SoftDeletes
 {
-    use SoftDeletesTrait;
+    use SoftDeletingTrait;
 
     /**
      * Get the fully qualified "deleted at" column.
