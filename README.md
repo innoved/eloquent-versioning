@@ -18,6 +18,16 @@ Eloquent Versioning is distributed as a composer package. So you first have to a
 "innoved/eloquent-versioning": "~2.0"
 ```
 
+Then add the repository source:
+```
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/innoved/eloquent-versioning"
+    }
+]
+```
+
 Then you have to run `composer update` to install the package.
 
 ## Example
