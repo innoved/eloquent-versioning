@@ -90,6 +90,10 @@ trait BuilderTrait
         // set ref_id
         $versionValues[$this->model->getVersionKeyName()] = $id;
 
+        if($this->model->hasUpdatedByColumn()) {
+            $versionValues['updated_by'] = $this->model->getAuthUserId();
+        }
+
         // insert version table record
         $db = $this->model->getConnection();
         if (! $db->table($this->model->getVersionTable())->insert($versionValues)) {
