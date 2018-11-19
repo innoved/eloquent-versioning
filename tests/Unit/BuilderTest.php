@@ -1,11 +1,11 @@
 <?php
 
-namespace ProAI\Versioning\Tests;
+namespace Innoved\Versioning\Tests;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use ProAI\Versioning\Tests\Models\Post;
-use ProAI\Versioning\Tests\Models\User;
+use Innoved\Versioning\Tests\Models\Post;
+use Innoved\Versioning\Tests\Models\User;
 
 class BuilderTest extends TestCase
 {

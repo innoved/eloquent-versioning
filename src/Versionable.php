@@ -1,6 +1,6 @@
 <?php
 
-namespace ProAI\Versioning;
+namespace Innoved\Versioning;
 
 trait Versionable
 {
@@ -33,7 +33,7 @@ trait Versionable
      * Create a new Eloquent query builder for the model.
      *
      * @param  \Illuminate\Database\Query\Builder $query
-     * @return \ProAI\Versioning\Builder|static
+     * @return \Innoved\Versioning\Builder|static
      */
     public function newEloquentBuilder($query)
     {

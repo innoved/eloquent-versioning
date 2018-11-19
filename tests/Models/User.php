@@ -1,11 +1,11 @@
 <?php
 
-namespace ProAI\Versioning\Tests\Models;
+namespace Innoved\Versioning\Tests\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use ProAI\Versioning\Versionable;
-use ProAI\Versioning\SoftDeletes;
+use Innoved\Versioning\Versionable;
+use Innoved\Versioning\SoftDeletes;
 
 class User extends Authenticatable
 {

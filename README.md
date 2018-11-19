@@ -48,8 +48,8 @@ The referring Eloquent model should include the code below:
 namespace Acme\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use ProAI\Versioning\Versionable;
-use ProAI\Versioning\SoftDeletes;
+use Innoved\Versioning\Versionable;
+use Innoved\Versioning\SoftDeletes;
 
 class User extends Model
 {
@@ -106,7 +106,7 @@ You can use timestamps in two ways. For both you have to set `$timestamps = true
 
 ### Soft Deletes
 
-If you use the `Versionable` trait with soft deletes, you have to use the `ProAI\Versioning\SoftDeletes` trait **from this package** instead of the Eloquent soft deletes trait.
+If you use the `Versionable` trait with soft deletes, you have to use the `Innoved\Versioning\SoftDeletes` trait **from this package** instead of the Eloquent soft deletes trait.
 
 * Normal soft deletes<br>Just use a `deleted_at` column in the main table. Then on delete or on restore the `deleted_at` value will be updated.
 
@@ -123,7 +123,7 @@ namespace Acme\Versioning;
 
 trait Versionable
 {
-    use \ProAI\Versioning\BaseVersionable;
+    use \Innoved\Versioning\BaseVersionable;
     
     public function newEloquentBuilder($query)
     {
@@ -134,8 +134,8 @@ trait Versionable
 
 Obviously you have to replace `MyVersioningBuilder` by the classname of your custom builder. In addition you have to make sure that your custom builder implements the functionality of the versioning query builder. There are some strategies to do this:
 
-* Extend the versioning query builder `ProAI\Versioning\Builder`
-* Use the versioning builder trait `ProAI\Versioning\BuilderTrait`
+* Extend the versioning query builder `Innoved\Versioning\Builder`
+* Use the versioning builder trait `Innoved\Versioning\BuilderTrait`
 * Copy and paste the code from the versioning query builder to your custom builder
 
 ## Support

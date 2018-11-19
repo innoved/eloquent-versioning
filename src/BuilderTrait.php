@@ -1,6 +1,6 @@
 <?php
 
-namespace ProAI\Versioning;
+namespace Innoved\Versioning;
 
 use Exception;
 

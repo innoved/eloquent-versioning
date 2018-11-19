@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use ProAI\Versioning\Tests\Models\Post;
+use Innoved\Versioning\Tests\Models\Post;
 
 /*
 |--------------------------------------------------------------------------

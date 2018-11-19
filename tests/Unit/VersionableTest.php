@@ -1,10 +1,10 @@
 <?php
 
-namespace ProAI\Versioning\Tests;
+namespace Innoved\Versioning\Tests;
 
 use Carbon\Carbon;
-use ProAI\Versioning\Tests\Models\User;
-use ProAI\Versioning\Tests\TestCase;
+use Innoved\Versioning\Tests\Models\User;
+use Innoved\Versioning\Tests\TestCase;
 
 class VersionableTest extends TestCase
 {

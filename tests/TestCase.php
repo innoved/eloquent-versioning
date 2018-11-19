@@ -1,6 +1,6 @@
 <?php
 
-namespace ProAI\Versioning\Tests;
+namespace Innoved\Versioning\Tests;
 
 use Orchestra\Database\ConsoleServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
