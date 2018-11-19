@@ -16,25 +16,43 @@ Then you have to run `composer update` to install the package.
 
 ## Example
 
-We assume that we want a simple user model. While the username should be fixed, the email and city should be versionable. Also timestamps and soft deletes should be versioned. The migrations would look like the following:
+We assume that we want a simple oc_courses model. While the establishment_id and status should be fixed, the actual content should be versionable. Also timestamps and soft deletes should be versioned. The migrations would look like the following:
 
 ```php
 ...
 
-Schema::create('users', function(Blueprint $table) {
+$schema = $this->getInnovedSchema();
+
+$schema->create('oc_courses', function(Blueprint $table) {
     $table->increments('id');
     $table->integer('latest_version');
-    $table->string('username');
-    $table->timestamp('created_at');
+    $table->integer('establishment_id');
+    $table->integer('status');
+    $table->createdstamps();
 });
 
-Schema::create('users_version', function(Blueprint $table) {
-    $table->integer('ref_id')->primary();
-    $table->integer('version')->primary();
-    $table->string('email');
-    $table->string('city');
-    $table->timestamp('updated_at');
-    $table->timestamp('deleted_at');
+$schema->create('oc_courses_version', function(Blueprint $table) {
+    $table->integer('ref_id')->key();
+    $table->integer('version')->key();
+    $table->string('level')->nullable();
+    $table->string('faculty')->nullable();
+    $table->string('code')->nullable();
+    $table->integer('number')->nullable();
+    $table->string('reference_number')->nullable();
+    $table->string('title');
+    $table->string('background_image')->nullable();
+    $table->string('short_intro')->nullable();
+    $table->string('long_intro')->nullable();
+    $table->string('syllabus')->nullable();
+    $table->integer('author_id');
+    $table->string('field_name_oc_module')->nullable();
+    $table->string('field_name_oc_modules')->nullable();
+    $table->string('field_name_oc_topic')->nullable();
+    $table->string('field_name_oc_topics')->nullable();
+    $table->string('field_name_oc_item')->nullable();
+    $table->string('field_name_oc_items')->nullable();
+    $table->updatedstamps();
+    $table->softDeletes();
 });
 
 ...
@@ -45,21 +63,39 @@ The referring Eloquent model should include the code below:
 ```php
 <?php
 
-namespace Acme\Models;
+namespace Innoved\OnlineContent;
 
-use Illuminate\Database\Eloquent\Model;
-use Innoved\Versioning\Versionable;
-use Innoved\Versioning\SoftDeletes;
+use Innoved\Versioning\InnovedBaseVersioningModel;
 
-class User extends Model
+class OC_Course extends InnovedBaseVersioningModel
 {
-    use Versionable, SoftDeletes;
-    
+    protected $table = 'oc_courses';
+
     public $timestamps = true;
-    
-    public $versioned = ['email', 'city', 'updated_at', 'deleted_at'];
-    
-    ...
+
+    public $versioned = [
+        'level',
+        'faculty',
+        'code',
+        'number',
+        'reference_number',
+        'title',
+        'background_image',
+        'short_intro',
+        'long_intro',
+        'syllabus',
+        'author_id',
+        'field_name_oc_module',
+        'field_name_oc_modules',
+        'field_name_oc_topic',
+        'field_name_oc_topics',
+        'field_name_oc_item',
+        'field_name_oc_items',
+        'updated_by',
+        'updated_at',
+        'deleted_at',
+    ];
+...
 }
 ```
 
