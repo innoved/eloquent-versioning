@@ -56,6 +56,10 @@ trait BuilderTrait
         $versionValues[$this->model->getVersionKeyName()] = $id;
         $versionValues[$this->model->getVersionColumn()] = 1;
 
+        if($this->model->hasUpdatedByColumn()) {
+            $recordVersionValues['updated_by'] = $this->model->getAuthUserId();
+        }
+
         // insert version table record
         $db = $this->model->getConnection();
         return $db->table($this->model->getVersionTable())->insert($versionValues);
@@ -129,7 +133,7 @@ trait BuilderTrait
                 $recordVersionValues[$key] = (isset($versionValues[$key])) ? $versionValues[$key] : $record->{$key};
             }
 
-            if($this->model->hasCreatedByColumn()) {
+            if($this->model->hasUpdatedByColumn()) {
                 $recordVersionValues['updated_by'] = $this->model->getAuthUserId();
             }
             
